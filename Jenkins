@@ -1,0 +1,38 @@
+pipeline {
+    agent any  // Run on any available Jenkins agent
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                // Example: sh 'mvn clean package' for a Java project
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Example: sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the project...'
+                // Example: sh 'scp target/app.war user@server:/path/'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'This will always run after all stages.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
