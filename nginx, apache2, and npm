@@ -1,0 +1,56 @@
+pipeline {
+  agent { label 'linux && apt' } // adjust to a node label you have
+  environment {
+    DEBIAN_FRONTEND = 'noninteractive'
+  }
+  options {
+    ansiColor('xterm')
+    timestamps()
+    timeout(time: 20, unit: 'MINUTES')
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Prepare') {
+      steps {
+        // make installer executable
+        sh 'chmod +x ./install_services.sh || true'
+      }
+    }
+
+    stage('Install Services') {
+      steps {
+        // run as sudo (agent node must allow it)
+        // if Jenkins agent runs as root, remove sudo
+        sh '''
+          if [ "$USER" != "root" ]; then
+            sudo -E ./install_services.sh
+          else
+            ./install_services.sh
+          fi
+        '''
+      }
+    }
+
+    stage('Verify') {
+      steps {
+        sh '''
+          echo "nginx status:"; sudo systemctl is-active nginx || sudo systemctl status nginx --no-pager || true
+          echo "apache2 status:"; sudo systemctl is-active apache2 || sudo systemctl status apache2 --no-pager || true
+          echo "node/npm version:"; node -v || true; npm -v || true
+        '''
+      }
+    }
+  }
+
+  post {
+    success { echo "Install pipeline finished successfully." }
+    failure {
+      echo "Install pipeline failed. Check console output and node connectivity."
+    }
+  }
+}
