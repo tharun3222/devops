@@ -5,12 +5,11 @@ pipeline {
       steps { checkout scm }
     }
     stage('Deploy') {
-      steps {
-        // run safe deploy script via sudo (defined on the server)
-        sh 'sudo /usr/local/bin/deploy_site.sh'
-      }
-    }
+  steps {
+    echo "Deploying from workspace: ${env.WORKSPACE}"
+    sh "sudo /usr/local/bin/deploy_site.sh \"${env.WORKSPACE}\""
   }
+}
   post {
     success { echo "Deployed!" }
     failure { echo "Deploy failed." }
