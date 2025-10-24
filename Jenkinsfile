@@ -41,7 +41,7 @@ pipeline {
 
         stage('Access Website') {
             steps {
-                echo 'Open your webpage at: http://YOUR_PUBLIC_IPv4/'
+                echo 'Open your webpage at: http:51.21.170.106'
             }
         }
     }
