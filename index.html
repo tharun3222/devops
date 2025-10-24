@@ -1,30 +1,10 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8" />
-    <title>Deployed from Jenkins to EC2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; text-align:center; padding:4rem; }
-      h1 { color:#1f6feb; }
-      small { color:#666; }
-      .meta { margin-top:2rem; font-size:0.9rem; color:#333; }
-    </style>
+    <title>My EC2 Webpage</title>
   </head>
-  <body>
-    <h1>Hello — deployed on EC2!</h1>
-    <p>This page was deployed by a Jenkins pipeline.</p>
-    <div class="meta">
-      <div>Deployed on: <span id="when"></span></div>
-      <div>Hostname: <span id="host"></span></div>
-    </div>
-
-    <script>
-      document.getElementById('when').textContent = new Date().toLocaleString();
-      fetch('/__hostname__')
-        .then(r => r.text())
-        .then(t => document.getElementById('host').textContent = t)
-        .catch(()=> document.getElementById('host').textContent = 'unknown');
-    </script>
+  <body style="text-align:center; font-family:sans-serif;">
+    <h1>Hello from EC2 Instance! 🚀</h1>
+    <p>This HTML page is deployed automatically using Jenkins Pipeline.</p>
   </body>
 </html>
