@@ -13,8 +13,8 @@ pipeline {
                 sh '''
                 # ===== Basic Setup =====
                 EC2_USER=ubuntu            # change to ec2-user if Amazon Linux
-                EC2_IP=YOUR_PUBLIC_IPv4    # put your EC2 public IPv4 here
-                KEY_PATH=/var/lib/jenkins/your-key.pem  # path to your EC2 private key on Jenkins
+                EC2_IP=51.21.170.106    # put your EC2 public IPv4 here
+                KEY_PATH="C:\Users\gulip\Downloads\jenkins-key.pem" # path to your EC2 private key on Jenkins
 
                 echo "Connecting to EC2: $EC2_USER@$EC2_IP"
 
