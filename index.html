@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>My EC2 Webpage</title>
-  </head>
-  <body style="text-align:center; font-family:sans-serif;">
-    <h1>Hello from EC2 Instance! 🚀</h1>
-    <p>This HTML page is deployed automatically using Jenkins Pipeline.</p>
-  </body>
+<head><meta charset="utf-8"><title>My Jenkins Site</title></head>
+<body>
+  <h1>Hello — deployed via Jenkins!</h1>
+  <p>Deployed at: <span id="time"></span></p>
+  <script>document.getElementById('time').innerText = new Date().toLocaleString();</script>
+</body>
 </html>
